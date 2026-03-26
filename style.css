@@ -1,0 +1,149 @@
+/* Custom CSS for EduAccess over Tailwind */
+
+/* Base Smoothness */
+html {
+    scroll-behavior: smooth;
+    transition: font-size 0.3s ease;
+}
+
+@keyframes gradientBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-bg {
+    background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #ff9a9e, #fecfef);
+    background-size: 400% 400%;
+    animation: gradientBg 15s ease infinite;
+}
+
+.dark .animated-bg {
+    background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #172554);
+    background-size: 400% 400%;
+    animation: gradientBg 15s ease infinite;
+}
+
+/* Custom Focus Outline for Accessibility */
+.focus-element {
+    outline: none;
+}
+.focus-element:focus-visible,
+.low-vision-mode .focus-element:focus,
+.low-vision-mode .focus-element:hover {
+    outline: 4px solid var(--focus-color, #4f46e5);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Low Vision Mode Hard Overrides */
+body.low-vision-mode {
+    --tw-bg-opacity: 1;
+    background-color: #000000 !important;
+    background-image: none !important; /* remove gradients */
+    color: #ffff00 !important; /* bright yellow text */
+}
+
+/* In low vision mode, we reset all nested bg/text colors to stark contrast */
+.low-vision-mode * {
+    background-color: transparent !important;
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
+}
+
+.low-vision-mode .bg-white,
+.low-vision-mode .dark\:bg-slate-800,
+.low-vision-mode .bg-indigo-600,
+.low-vision-mode section,
+.low-vision-mode div {
+    background-color: #0d0d0d !important;
+}
+
+.low-vision-mode button,
+.low-vision-mode [role="button"] {
+    border: 3px solid #ffff00 !important;
+    background-color: #000 !important;
+}
+
+.low-vision-mode .focus-element:focus,
+.low-vision-mode .focus-element:hover,
+.low-vision-mode button:hover {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    outline: 4px solid #ffff00 !important;
+}
+
+.low-vision-mode input {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 3px solid #ffff00 !important;
+}
+
+/* Font Scaling for Low Vision Mode (150% scales Tailwind rem utility classes well without breaking flex layouts instantly) */
+.low-vision-mode {
+    font-size: 150%; 
+}
+
+/* Visual Flash Animation for Alerts */
+@keyframes edgeFlash {
+    0% { border-color: transparent; }
+    50% { border-color: #ef4444; }
+    100% { border-color: transparent; }
+}
+.flash-alert {
+    animation: edgeFlash 1s ease-in-out 3;
+    opacity: 1 !important;
+}
+
+/* Glassmorphism utility */
+.glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.dark .glass {
+    background: rgba(30, 41, 59, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9; 
+}
+.dark ::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+}
+
+/* Vibrational Notification Animation */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.quiz-shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
